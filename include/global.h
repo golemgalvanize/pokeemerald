@@ -256,6 +256,22 @@ struct UnknownSaveBlock2Struct
     u8 field_EB;
 }; // sizeof = 0xEC
 
+struct UnknownSaveBlock2FrontierStruct
+{
+    u16 move[4];
+    u8 ev[6];
+    u8 nature;
+}; // sizeof = 0x10
+
+struct UnknownSaveBlock2FrontierStruct_2
+{
+    u16 field_0_a : 10;
+    u16 field_0_b : 1;
+    u16 field_0_c : 2;
+    u16 field_0_d : 3;
+    u16 filler2;
+}; // sizeof = 0x4
+
 struct SaveBlock2
 {
     /*0x00*/ u8 playerName[PLAYER_NAME_LENGTH];
@@ -297,7 +313,8 @@ struct SaveBlock2
     /*0xBD8*/ u8 field_BD8[11];
     /*0xBE3*/ u8 filler_BE3[8];
     /*0xBEB*/ u8 field_BEB;
-    /*0xBE3*/ u8 filler_BEC[189];
+    /*0xBE3*/ u8 filler_BEC[188];
+    /*0xCA8*/ u8 field_CA8;
     /*0xCA9*/ u8 frontierChosenLvl : 2; // 0x1, 0x2 -> 0x3
     /*0xCA9*/ u8 field_CA9_a : 1;   // 0x4
     /*0xCA9*/ u8 field_CA9_b : 1;   // 0x8
@@ -307,10 +324,26 @@ struct SaveBlock2
     /*0xCA9*/ u8 field_CA9_f : 1;   // 0x80
     /*0xCAA*/ u16 field_CAA[4];
     /*0xCB2*/ u16 battlePyramidWildHeaderId;
-    /*0xCB4*/ u16 field_CB4[41];
+    /*0xCB4*/ u16 field_CB4[20];
+    /*0xCDC*/ u32 field_CDC;
+    /*0xCE0*/ u16 field_CE0[19];
     /*0xD06*/ u8 field_D06;
     /*0xD07*/ u8 field_D07;
-    /*0xD08*/ u8 filler_D08[0x112];
+    /*0xD08*/ u8 field_D08_a : 1;
+    /*0xD08*/ u8 field_D08_b : 1;
+    /*0xD08*/ u8 field_D08_c : 1;
+    /*0xD08*/ u8 field_D08_d : 1;
+    /*0xD08*/ u8 field_D08_e : 1;
+    /*0xD08*/ u8 field_D08_f : 1;
+    /*0xD08*/ u8 field_D08_g : 1;
+    /*0xD08*/ u8 field_D08_h : 1;
+    /*0xD09*/ u8 filler_D09;
+    /*0xD0A*/ u8 field_D0A;
+    /*0xD0B*/ u8 field_D0B;
+    /*0xD0C*/ u16 field_D0C[6][2];
+    /*0xD24*/ struct UnknownSaveBlock2FrontierStruct_2 frontierStruct2[15];
+    /*0xD60*/ u16 filler_D60[2];
+    /*0xD64*/ u16 field_D64[0x59];
     /*0xE1A*/ u16 battlePyramidFloor; // possibly?
     /*0xE1C*/ u8 field_E1C[16];
     /*0xE2C*/ struct PyramidBag pyramidBag;
@@ -322,7 +355,8 @@ struct SaveBlock2
     /*0xEE1*/ u8 field_EE1;
     /*0xEE2*/ u8 field_EE2[7];
     /*0xEE9*/ u8 field_EE9;
-    /*0xEEA*/ u8 field_EEA[66];
+    /*0xEEA*/ u8 field_EEA[22];
+    /*0xEFC*/ struct UnknownSaveBlock2FrontierStruct frontierStruct[3];
     // sizeof=0xF2C
 };
 

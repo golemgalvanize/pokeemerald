@@ -240,6 +240,7 @@ SECTIONS {
         src/battle_controller_recorded_player.o(.text);
         src/battle_dome_cards.o(.text);
         src/lilycove_lady.o(.text);
+        src/battle_frontier_1.o(.text);
         asm/battle_frontier_1.o(.text);
         src/menu.o(.text);
         asm/battle_frontier_2.o(.text);
