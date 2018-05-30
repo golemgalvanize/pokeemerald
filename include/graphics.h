@@ -3268,6 +3268,14 @@ extern const u16 gIntro2BrendanNoTurnPal[];
 extern const u16 gIntro2FlygonPal[];
 extern const u8 gIntro2FlygonGfx[];
 
+//battle frontier graphics
+extern const u8 gUnknown_08D83D50[];
+extern const u8 gUnknown_08D84970[];
+extern const u8 gUnknown_08D84F00[];
+extern const u8 gUnknown_08D85358[];
+extern const u8 gUnknown_08D85444[];
+extern const u8 gUnknown_08D854C8[];
+
 // berry pics
 extern const u8 gBerryPic_Cheri[];
 extern const u8 gBerryPalette_Cheri[];

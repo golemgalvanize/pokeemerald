@@ -340,10 +340,13 @@ struct SaveBlock2
     /*0xD09*/ u8 filler_D09;
     /*0xD0A*/ u8 field_D0A;
     /*0xD0B*/ u8 field_D0B;
-    /*0xD0C*/ u16 field_D0C[6][2];
+    /*0xD0C*/ u16 field_D0C[2][2];
+    /*0xD14*/ u16 field_D14[2][2];
+    /*0xD1C*/ u16 field_D1C[2][2];
     /*0xD24*/ struct UnknownSaveBlock2FrontierStruct_2 frontierStruct2[15];
     /*0xD60*/ u16 filler_D60[2];
-    /*0xD64*/ u16 field_D64[0x59];
+    /*0xD64*/ u16 field_D64[0x1E][3];
+    /*0xE18*/ u16 filler_E18;
     /*0xE1A*/ u16 battlePyramidFloor; // possibly?
     /*0xE1C*/ u8 field_E1C[16];
     /*0xE2C*/ struct PyramidBag pyramidBag;
@@ -355,7 +358,7 @@ struct SaveBlock2
     /*0xEE1*/ u8 field_EE1;
     /*0xEE2*/ u8 field_EE2[7];
     /*0xEE9*/ u8 field_EE9;
-    /*0xEEA*/ u8 field_EEA[22];
+    /*0xEEA*/ u8 field_EEA[18];
     /*0xEFC*/ struct UnknownSaveBlock2FrontierStruct frontierStruct[3];
     // sizeof=0xF2C
 };
