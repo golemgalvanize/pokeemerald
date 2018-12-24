@@ -65,6 +65,7 @@ static bool8 TryStartMiscWalkingScripts(u16);
 static bool8 TryStartStepCountScript(u16);
 static void UpdateHappinessStepCounter(void);
 static bool8 UpdatePoisonStepCounter(void);
+const u8 *GetInteractedHeadbuttScript(struct MapPosition *unused1, u8 metatileBehavior, u8 direction);
 
 void FieldClearPlayerInput(struct FieldInput *input)
 {
@@ -249,6 +250,10 @@ static const u8 *GetInteractionScript(struct MapPosition *position, u8 metatileB
         return script;
 
     script = GetInteractedWaterScript(position, metatileBehavior, direction);
+    if (script != NULL)
+        return script;
+    
+    script = GetInteractedHeadbuttScript(position, metatileBehavior, direction);
     if (script != NULL)
         return script;
 
@@ -1004,4 +1009,26 @@ int SetCableClubWarp(void)
     MapGridGetMetatileBehaviorAt(position.x, position.y);  //unnecessary
     sub_809CEB0(&gMapHeader, GetWarpEventAtMapPosition(&gMapHeader, &position), &position);
     return 0;
+}
+
+bool8 TryContinueHeadbuttScript(struct MapPosition *position, u16 metatileBehavior, u8 direction)
+{
+    const u8 *script = GetInteractedEventObjectScript(position, metatileBehavior, direction);
+    
+    if (script != NULL)
+    {
+        ScriptContext1_SetupScript(script);
+        return TRUE;
+    }
+    else
+    {
+        ScriptContext1_SetupScript(EventScript_UseSurf);
+    }
+}
+
+const u8 *GetInteractedHeadbuttScript(struct MapPosition *unused1, u8 metatileBehavior, u8 direction)
+{
+    if (PartyHasMonWithHeadbutt() == TRUE && IsPlayerFacingHeadbuttTree() == TRUE)
+        return EventScript_UseSurf;
+    return NULL;
 }

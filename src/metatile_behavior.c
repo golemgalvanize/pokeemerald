@@ -171,7 +171,7 @@ static const u8 sTileBitAttributes[] =
     [MB_UNUSED_9E] = TILE_ATTRIBUTES(FALSE, FALSE, FALSE),
     [MB_UNUSED_9F] = TILE_ATTRIBUTES(FALSE, FALSE, FALSE),
     [MB_BERRY_TREE_SOIL] = TILE_ATTRIBUTES(FALSE, FALSE, FALSE),
-    [MB_UNUSED_A1] = TILE_ATTRIBUTES(FALSE, FALSE, FALSE),
+    [MB_HEADBUTT_TREE] = TILE_ATTRIBUTES(FALSE, FALSE, FALSE),
     [MB_UNUSED_A2] = TILE_ATTRIBUTES(FALSE, FALSE, FALSE),
     [MB_UNUSED_A3] = TILE_ATTRIBUTES(FALSE, FALSE, FALSE),
     [MB_UNUSED_A4] = TILE_ATTRIBUTES(FALSE, FALSE, FALSE),
@@ -1484,6 +1484,14 @@ bool8 MetatileBehavior_IsLongGrassSouthEdge(u8 metatileBehavior)
 bool8 MetatileBehavior_IsTrainerHillTimer(u8 metatileBehavior)
 {
     if (metatileBehavior == MB_TRAINER_HILL_TIMER)
+        return TRUE;
+    else
+        return FALSE;
+}
+
+bool8 MetatileBehavior_IsHeadbuttTree(u8 metatileBehavior)
+{
+    if (metatileBehavior == MB_HEADBUTT_TREE)
         return TRUE;
     else
         return FALSE;
