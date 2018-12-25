@@ -114,6 +114,7 @@ Route111_EventScript_2907FB:: @ 82907FB
 	specialvar VAR_RESULT, TryUpdateRusturfTunnelState
 	compare VAR_RESULT, 1
 	goto_if_eq Route111_EventScript_290829
+	setvar VAR_0x8004 0
 	special RockSmashWildEncounter
 	compare VAR_RESULT, 0
 	goto_if_eq Route111_EventScript_290829
@@ -218,6 +219,43 @@ FieryPath_Text_2909D6: @ 82909D6
 FieryPath_Text_290A16: @ 8290A16
 	.string "STRENGTH made it possible to move\n"
 	.string "boulders around.$"
+
+EventScript_UseHeadbuttFromParty:: @ 82908FD
+	lockall
+	msgbox gHeadbuttString2, MSGBOX_DEFAULT
+	dofieldeffect FLDEFF_USE_HEADBUTT
+	waitstate
+	end
+
+EventScript_UseHeadbutt:: @ 8271EA0
+	checkpartymove MOVE_HEADBUTT
+	bufferpartymonnick 0, VAR_RESULT
+	setfieldeffectargument 0, VAR_RESULT
+	lockall
+	msgbox gHeadbuttString, MSGBOX_YESNO
+	compare VAR_RESULT, 0
+	goto_if_eq FieryPath_EventScript_290929
+	msgbox gHeadbuttString2, MSGBOX_DEFAULT
+	dofieldeffect FLDEFF_USE_HEADBUTT
+    waitstate
+	setvar VAR_0x8004 1
+	special RockSmashWildEncounter
+	compare VAR_RESULT, 0
+	goto_if_eq FieryPath_EventScript_290929
+	msgbox gHeadbuttString3, MSGBOX_DEFAULT
+    dowildbattle
+    releaseall
+    end
+
+gHeadbuttString:: @ 8272F07
+	.string "It's a moderately sized tree!\n"
+	.string "Would you like to use HEADBUTT?$"
+
+gHeadbuttString2::
+	.string "{STR_VAR_1} used HEADBUTT!$"
+
+gHeadbuttString3::
+	.string "A POKéMON fell from the tree!$"
 
 EventScript_UseWaterfall:: @ 8290A49
 	lockall

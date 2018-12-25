@@ -2254,7 +2254,7 @@ bool8 IsPlayerFacingHeadbuttTree(void)
     s16 y = playerEventObj->currentCoords.y;
 
     MoveCoords(playerEventObj->facingDirection, &x, &y);
-    if (GetCollisionAtCoords(playerEventObj, x, y, playerEventObj->facingDirection) == 1 && 
+    if (GetCollisionAtCoords(playerEventObj, x, y, playerEventObj->facingDirection) == 2 && 
     MetatileBehavior_IsHeadbuttTree(MapGridGetMetatileBehaviorAt(x, y)))
         return TRUE;
     else

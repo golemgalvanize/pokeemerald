@@ -231,6 +231,12 @@ static void sub_80B9BE8(u8 taskId);
 static void sub_80B9DB8(struct Sprite* sprite);
 static void sub_80B9EDC(u8 taskId);
 
+static void MainHeadbuttTask(u8);
+static void HeadbuttTask1(struct Task*);
+static void HeadbuttTask2(struct Task*);
+static void HeadbuttTask3(struct Task*);
+static void HeadbuttTask4(struct Task*);
+
 // Static RAM declarations
 
 static IWRAM_DATA u8 sActiveList[32];
@@ -3702,3 +3708,83 @@ static void sub_80B9EDC(u8 taskId)
             break;
     }
 }
+
+/* u8 FldEff_UseHeadbutt(void)
+{
+    u8 taskId = CreateTask(MainHeadbuttTask, 0xff);
+    gTasks[taskId].data[15] = gFieldEffectArguments[0];
+    return FALSE;
+}
+
+void (*const gHeadbuttTasks[])(struct Task *) = {
+    HeadbuttTask1,
+    HeadbuttTask2,
+    HeadbuttTask3,
+    HeadbuttTask4,
+};
+
+static void MainHeadbuttTask(u8 taskId)
+{
+    gHeadbuttTasks[gTasks[taskId].data[0]](&gTasks[taskId]);
+}
+
+static void HeadbuttTask1(struct Task *task)
+{
+    ScriptContext2_Enable();
+    FreezeEventObjects();
+    gPlayerAvatar.preventStep = TRUE;
+    SetPlayerAvatarStateMask(8);
+    task->data[0]++;
+}
+
+static void HeadbuttTask2(struct Task *task)
+{
+    struct EventObject *eventObject;
+    eventObject = &gEventObjects[gPlayerAvatar.eventObjectId];
+    if (!EventObjectIsMovementOverridden(eventObject) || EventObjectClearHeldMovementIfFinished(eventObject))
+    {
+        sub_808C114();
+        EventObjectSetHeldMovement(eventObject, MOVEMENT_ACTION_START_ANIM_IN_DIRECTION);
+        task->data[0]++;
+    }
+}
+
+static void HeadbuttTask3(struct Task *task)
+{
+    struct EventObject *eventObject;
+    eventObject = &gEventObjects[gPlayerAvatar.eventObjectId];
+    if (EventObjectCheckHeldMovementStatus(eventObject))
+    {
+        gFieldEffectArguments[0] = task->data[15] | 0x80000000;
+        FieldEffectStart(FLDEFF_FIELD_MOVE_SHOW_MON_INIT);
+        task->data[0]++;
+    }
+}
+
+static void HeadbuttTask4(struct Task *task)
+{
+    struct EventObject *eventObject;
+    if (!FieldEffectActiveListContains(FLDEFF_FIELD_MOVE_SHOW_MON))
+    {
+        eventObject = &gEventObjects[gPlayerAvatar.eventObjectId];
+        gPlayerAvatar.preventStep = FALSE;
+        UnfreezeEventObjects();
+        ScriptContext2_Disable();
+        FieldEffectActiveListRemove(FLDEFF_USE_SURF);
+        DestroyTask(FindTaskIdByFunc(sub_80B8D84));
+    }
+} */
+
+/* static void sub_80B8F24(struct Task *task)
+{
+    struct EventObject *eventObject;
+    eventObject = &gEventObjects[gPlayerAvatar.eventObjectId];
+    if (EventObjectClearHeldMovementIfFinished(eventObject))
+    {
+        gPlayerAvatar.preventStep = FALSE;
+        gPlayerAvatar.flags &= 0xdf;
+        EventObjectSetHeldMovement(eventObject, GetFaceDirectionMovementAction(eventObject->movementDirection));
+        sub_81555AC(eventObject->fieldEffectSpriteId, 1);
+        
+    }
+} */

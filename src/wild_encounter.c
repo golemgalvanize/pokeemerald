@@ -387,6 +387,7 @@ enum
     WILD_AREA_WATER,
     WILD_AREA_ROCKS,
     WILD_AREA_FISHING,
+    WILD_AREA_TREE,
 };
 
 #define WILD_CHECK_REPEL    0x1
@@ -414,6 +415,9 @@ static bool8 TryGenerateWildMon(const struct WildPokemonInfo *wildMonInfo, u8 ar
         wildMonIndex = ChooseWildMonIndex_WaterRock();
         break;
     case WILD_AREA_ROCKS:
+        wildMonIndex = ChooseWildMonIndex_WaterRock();
+        break;
+    case WILD_AREA_TREE:
         wildMonIndex = ChooseWildMonIndex_WaterRock();
         break;
     }
@@ -641,11 +645,20 @@ void RockSmashWildEncounter(void)
 
     if (headerId != 0xFFFF)
     {
-        const struct WildPokemonInfo *wildPokemonInfo = gWildMonHeaders[headerId].rockSmashMonsInfo;
+        const struct WildPokemonInfo *wildPokemonInfo;
+        
+        if (gSpecialVar_0x8004 == 1)
+            wildPokemonInfo = gWildMonHeaders[headerId].headbuttMonsInfo;
+        else
+            wildPokemonInfo = gWildMonHeaders[headerId].rockSmashMonsInfo;
 
         if (wildPokemonInfo == NULL)
         {
             gSpecialVar_Result = FALSE;
+        }
+        else if (gSpecialVar_0x8004 == 1 && TryGenerateWildMon(wildPokemonInfo, 4, 0) == TRUE)
+        {
+            gSpecialVar_Result = TRUE;
         }
         else if (DoWildEncounterRateTest(wildPokemonInfo->encounterRate, 1) == TRUE
          && TryGenerateWildMon(wildPokemonInfo, 2, WILD_CHECK_REPEL | WILD_CHECK_KEEN_EYE) == TRUE)

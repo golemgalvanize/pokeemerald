@@ -209,6 +209,7 @@ SECTIONS {
         src/coins.o(.text);
         src/landmark.o(.text);
         src/fldeff_strength.o(.text);
+        src/fldeff_headbutt.o(.text);
         src/battle_transition.o(.text);
         src/battle_controller_link_partner.o(.text);
         src/battle_message.o(.text);

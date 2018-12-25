@@ -68,5 +68,6 @@
 #define FLDEFF_64                        64
 #define FLDEFF_65                        65
 #define FLDEFF_66                        66
+#define FLDEFF_USE_HEADBUTT              67
 
 #endif

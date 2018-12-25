@@ -72,6 +72,7 @@ gFieldEffectScriptPointers:: @ 82DB9D4
 	.4byte gFieldEffectScript_Rayquaza
 	.4byte gFieldEffectScript_Unknown65
 	.4byte gFieldEffectScript_Unknown66
+    .4byte gFieldEffectScript_UseHeadbutt
 
 gFieldEffectScript_ExclamationMarkIcon1:: @ 82DBAE0
 	field_eff_callnative FldEff_ExclamationMarkIcon
@@ -342,4 +343,8 @@ gFieldEffectScript_Unknown65:: @ 82DBCF9
 
 gFieldEffectScript_Unknown66:: @ 82DBCFF
 	field_eff_callnative sub_80B9E28
+	field_eff_end
+
+gFieldEffectScript_UseHeadbutt:: @ 82DBB22
+	field_eff_callnative HeadbuttInit
 	field_eff_end

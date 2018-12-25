@@ -1029,6 +1029,6 @@ bool8 TryContinueHeadbuttScript(struct MapPosition *position, u16 metatileBehavi
 const u8 *GetInteractedHeadbuttScript(struct MapPosition *unused1, u8 metatileBehavior, u8 direction)
 {
     if (PartyHasMonWithHeadbutt() == TRUE && IsPlayerFacingHeadbuttTree() == TRUE)
-        return EventScript_UseSurf;
+        return EventScript_UseHeadbutt;
     return NULL;
 }
