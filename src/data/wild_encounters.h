@@ -85,6 +85,17 @@ const struct WildPokemon gRoute102_FishingMons[] =
 
 const struct WildPokemonInfo gRoute102_FishingMonsInfo = {30, gRoute102_FishingMons};
 
+const struct WildPokemon gRoute102_HeadbuttMons[] =
+{
+    {5, 5, SPECIES_GROUDON},
+    {5, 5, SPECIES_GROUDON},
+    {5, 5, SPECIES_GROUDON},
+    {5, 5, SPECIES_GROUDON},
+    {5, 5, SPECIES_GROUDON},
+};
+
+const struct WildPokemonInfo gRoute102_HeadbuttMonsInfo = {20, gRoute102_HeadbuttMons};
+
 const struct WildPokemon gRoute103_LandMons[] =
 {
     {2, 2, SPECIES_POOCHYENA},
@@ -129,6 +140,17 @@ const struct WildPokemon gRoute103_FishingMons[] =
 };
 
 const struct WildPokemonInfo gRoute103_FishingMonsInfo = {30, gRoute103_FishingMons};
+
+const struct WildPokemon gRoute103_HeadbuttMons[] =
+{
+    {5, 5, SPECIES_KYOGRE},
+    {5, 5, SPECIES_KYOGRE},
+    {5, 5, SPECIES_KYOGRE},
+    {5, 5, SPECIES_KYOGRE},
+    {5, 5, SPECIES_KYOGRE},
+};
+
+const struct WildPokemonInfo gRoute103_HeadbuttMonsInfo = {20, gRoute103_HeadbuttMons};
 
 const struct WildPokemon gRoute104_LandMons[] =
 {
@@ -3271,6 +3293,7 @@ const struct WildPokemonHeader gWildMonHeaders[] =
         .waterMonsInfo = &gRoute102_WaterMonsInfo,
         .rockSmashMonsInfo = NULL,
         .fishingMonsInfo = &gRoute102_FishingMonsInfo,
+        .headbuttMonsInfo = &gRoute102_HeadbuttMonsInfo,
     },
     {
         .mapGroup = MAP_GROUP(ROUTE103),
@@ -3279,6 +3302,7 @@ const struct WildPokemonHeader gWildMonHeaders[] =
         .waterMonsInfo = &gRoute103_WaterMonsInfo,
         .rockSmashMonsInfo = NULL,
         .fishingMonsInfo = &gRoute103_FishingMonsInfo,
+        .headbuttMonsInfo = &gRoute103_HeadbuttMonsInfo,
     },
     {
         .mapGroup = MAP_GROUP(ROUTE104),

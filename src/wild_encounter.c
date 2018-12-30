@@ -22,6 +22,8 @@
 #include "battle_pyramid.h"
 #include "constants/items.h"
 #include "constants/maps.h"
+#include "constants/metatile_behaviors.h"
+#include "event_object_movement.h"
 
 extern const u8 EventScript_RepelWoreOff[];
 
@@ -940,4 +942,48 @@ static void ApplyCleanseTagEncounterRateMod(u32 *encRate)
 {
     if (GetMonData(&gPlayerParty[0], MON_DATA_HELD_ITEM) == ITEM_CLEANSE_TAG)
         *encRate = *encRate * 2 / 3;
+}
+
+void InitiateWildBattleFromHeadbutt(void)
+{
+    u16 headerId = GetCurrentMapWildMonHeaderId();
+    struct EventObject *playerEventObj = &gEventObjects[gPlayerAvatar.eventObjectId];
+    s16 x = playerEventObj->currentCoords.x;
+    s16 y = playerEventObj->currentCoords.y;
+    const struct WildPokemonInfo *headbuttMonsInfo;
+    // u16 xorShift;
+    u32 i;
+
+    MoveCoords(playerEventObj->facingDirection, &x, &y);
+    if (headerId != 0xFFFF)
+    {
+        if (MapGridGetMetatileBehaviorAt(x, y) == MB_HEADBUTT_TREE_RIGHT)
+            x--;
+        for (i = 0; i < y; i++)
+        {
+            x ^= x << 13;
+            x ^= x >> 17;
+            x ^= x << 5;
+        }
+        if (x % 4 == 0)
+        {
+            headbuttMonsInfo = gWildMonHeaders[headerId].headbuttMonsInfo;
+            if (headbuttMonsInfo != NULL && TryGenerateWildMon(headbuttMonsInfo, 4, 0) == TRUE)
+            {
+                gSpecialVar_Result = TRUE;
+            }
+            else
+            {
+                gSpecialVar_Result = FALSE;
+            }
+        }
+        else
+        {
+            gSpecialVar_Result = FALSE;
+        }
+    }
+    else
+    {
+        gSpecialVar_Result = FALSE;
+    }
 }

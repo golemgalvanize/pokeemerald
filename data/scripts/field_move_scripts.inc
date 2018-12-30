@@ -239,11 +239,19 @@ EventScript_UseHeadbutt:: @ 8271EA0
 	dofieldeffect FLDEFF_USE_HEADBUTT
     waitstate
 	setvar VAR_0x8004 1
-	special RockSmashWildEncounter
+	special InitiateWildBattleFromHeadbutt
 	compare VAR_RESULT, 0
-	goto_if_eq FieryPath_EventScript_290929
+	goto_if_eq EventScript_UseHeadbutt2
 	msgbox gHeadbuttString3, MSGBOX_DEFAULT
     dowildbattle
+    releaseall
+    end
+
+EventScript_UseHeadbutt2:: @ 8271EA0
+	special HeadbuttFunc3
+	compare VAR_0x8004, 0
+	goto_if_eq FieryPath_EventScript_290929
+	giveitem_std VAR_0x8004, 1, 1
     releaseall
     end
 

@@ -5,17 +5,47 @@
 #include "field_camera.h"
 #include "field_effect.h"
 #include "party_menu.h"
+#include "random.h"
 #include "rom6.h"
 #include "script.h"
+#include "sound.h"
 #include "string_util.h"
 #include "task.h"
 #include "constants/event_objects.h"
 #include "constants/field_effects.h"
+#include "constants/items.h"
+#include "constants/maps.h"
+#include "constants/songs.h"
+
+struct HeadbuttItemData
+{
+    u8 mapGroup;
+    u8 mapNum;
+    u16 dropRate;
+    u16 items[5];
+};
 
 void HeadbuttFunc1(u8);
 void DoHeadbuttShakingEffect(void);
 void HeadbuttShakingEffect(u8);
 void HeadbuttFunc2(u8);
+
+const struct HeadbuttItemData gHeadbuttItems[] =
+{
+    {
+        .mapGroup = MAP_GROUP(ROUTE101),
+        .mapNum = MAP_NUM(ROUTE101), 
+        .dropRate = 100,
+        .items = {ITEM_STICK, ITEM_STICK, ITEM_STICK, ITEM_STICK, ITEM_STICK,},
+    },
+    
+    {
+        .mapGroup = MAP_GROUP(OLDALE_TOWN),
+        .mapNum = MAP_NUM(OLDALE_TOWN), 
+        .dropRate = 100,
+        .items = {ITEM_ORAN_BERRY, ITEM_ORAN_BERRY, ITEM_ORAN_BERRY, ITEM_ORAN_BERRY, ITEM_ORAN_BERRY,},
+    },
+};
 
 u8 FldEff_UseHeadbutt(void)
 {
@@ -48,6 +78,7 @@ void DoHeadbuttShakingEffect(void)
     gTasks[taskId].data[5] = 4;
     gTasks[taskId].data[6] = 8;
     SetCameraPanningCallback(0);
+    PlaySE(SE_W233B);
 }
 
 void HeadbuttShakingEffect(u8 taskId)
@@ -97,5 +128,44 @@ void HeadbuttFunc2(u8 taskId)
         DestroyTask(taskId);
         FieldEffectActiveListRemove(FLDEFF_USE_HEADBUTT);
         EnableBothScriptContexts();
+    }
+}
+
+void HeadbuttFunc3(void)
+{
+    u16 rng;
+    u16 i;
+    
+    for (i = 0; i < ARRAY_COUNT(gHeadbuttItems); i++)
+    {
+        if (gHeadbuttItems[i].mapGroup == gSaveBlock1Ptr->location.mapGroup &&
+            gHeadbuttItems[i].mapNum == gSaveBlock1Ptr->location.mapNum)
+            break;
+    }
+    if (i == ARRAY_COUNT(gHeadbuttItems))
+    {
+        gSpecialVar_0x8004 = ITEM_NONE;
+    }
+    else
+    {
+        rng = Random2() % 100;
+        if (rng < gHeadbuttItems[i].dropRate)
+        {
+            rng = Random2() % 100;
+            if (rng < 60)                  // 60% chance
+                gSpecialVar_0x8004 = gHeadbuttItems[i].items[0];
+            else if (rng >= 60 && rng < 90)    // 30% chance
+                gSpecialVar_0x8004 = gHeadbuttItems[i].items[1];
+            else if (rng >= 90 && rng < 95)    // 5% chance
+                gSpecialVar_0x8004 = gHeadbuttItems[i].items[2];
+            else if (rng >= 95 && rng < 99)    // 4% chance
+                gSpecialVar_0x8004 = gHeadbuttItems[i].items[3];
+            else                            // 1% chance
+                gSpecialVar_0x8004 = gHeadbuttItems[i].items[4];
+        }
+        else
+        {
+            gSpecialVar_0x8004 = ITEM_NONE;
+        }
     }
 }
