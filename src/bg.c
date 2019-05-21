@@ -97,6 +97,7 @@ enum
 
 static void SetBgControlAttributes(u8 bg, u8 charBaseIndex, u8 mapBaseIndex, u8 screenSize, u8 paletteMode, u8 priority, u8 mosaic, u8 wraparound)
 {
+    NoCashGBAPrintf("address: %x", &sGpuBgConfigs2[1]);
     if (!IsInvalidBg(bg))
     {
         if (charBaseIndex != 0xFF)

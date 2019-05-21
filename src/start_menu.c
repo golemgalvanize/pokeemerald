@@ -36,6 +36,7 @@
 #include "battle_pyramid_bag.h"
 #include "battle_pike.h"
 #include "new_game.h"
+#include "test_ui.h"
 
 // Menu actions
 enum
@@ -112,6 +113,7 @@ static bool8 StartMenuSafariZoneRetireCallback(void);
 static bool8 StartMenuLinkModePlayerNameCallback(void);
 static bool8 StartMenuBattlePyramidRetireCallback(void);
 static bool8 StartMenuBattlePyramidBagCallback(void);
+static bool8 StartMenuTestUICallback(void);
 
 // Menu callbacks
 static bool8 SaveStartCallback(void);
@@ -174,7 +176,7 @@ static const struct MenuAction sStartMenuItems[] =
     {gText_MenuPlayer, {.u8_void = StartMenuPlayerNameCallback}},
     {gText_MenuSave, {.u8_void = StartMenuSaveCallback}},
     {gText_MenuOption, {.u8_void = StartMenuOptionCallback}},
-    {gText_MenuExit, {.u8_void = StartMenuExitCallback}},
+    {gText_MenuExit, {.u8_void = StartMenuTestUICallback/* StartMenuExitCallback */}},
     {gText_MenuRetire, {.u8_void = StartMenuSafariZoneRetireCallback}},
     {gText_MenuPlayer, {.u8_void = StartMenuLinkModePlayerNameCallback}},
     {gText_MenuRest, {.u8_void = StartMenuSaveCallback}},
@@ -640,6 +642,21 @@ static bool8 StartMenuPokemonCallback(void)
         RemoveExtraStartMenuWindows();
         CleanupOverworldWindowsAndTilemaps();
         SetMainCallback2(CB2_PartyMenuFromStartMenu); // Display party menu
+
+        return TRUE;
+    }
+
+    return FALSE;
+}
+
+static bool8 StartMenuTestUICallback(void)
+{
+    if (!gPaletteFade.active)
+    {
+        PlayRainSoundEffect();
+        RemoveExtraStartMenuWindows();
+        CleanupOverworldWindowsAndTilemaps();
+        SetMainCallback2(TestUIStartMenu); // Display party menu
 
         return TRUE;
     }

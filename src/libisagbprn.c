@@ -142,7 +142,7 @@ void AGBPrintFlush(void)
     AGBPrintTransferDataInternal(TRUE);
 }
 
-void AGBAssert(const char *pFile, int nLine, const char *pExpression, int nStopProgram)
+void AGBAssert_(const char *pFile, int nLine, const char *pExpression, int nStopProgram)
 {
     if (nStopProgram)
     {
@@ -157,7 +157,7 @@ void AGBAssert(const char *pFile, int nLine, const char *pExpression, int nStopP
 }
 
 // no$gba print functions, uncomment to use
-/*
+
 void NoCashGBAPrint(const char *pBuf)
 {
     *(volatile u32*)NOCASHGBAPRINTADDR2 = (u32)pBuf;
@@ -172,6 +172,6 @@ void NoCashGBAPrintf(const char *pBuf, ...)
     va_end(vArgv);
     NoCashGBAPrint(bufPrint);
 }
-*/
+
 
 #endif

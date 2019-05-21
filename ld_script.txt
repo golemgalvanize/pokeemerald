@@ -278,6 +278,7 @@ SECTIONS {
         src/save_location.o(.text);
         src/item_icon.o(.text);
         src/party_menu.o(.text);
+        src/test_ui.o(.text);
         src/battle_tent.o(.text);
         src/unk_text_util_2.o(.text);
         src/multiboot.o(.text);
@@ -380,6 +381,16 @@ SECTIONS {
         *libc.a:libcfunc.o(.text);
         *libc.a:syscalls.o(.text);
         *libc.a:errno.o(.text);
+        *libc.a:vfprintf.o(.text);
+        *libc.a:locale.o(.text);
+        *libc.a:findfp.o(.text);
+        *libc.a:fflush.o(.text);
+        *libc.a:wsetup.o(.text);
+        *libc.a:dtoa.o(.text);
+        *libc.a:mprec.o(.text);
+        *libc.a:mallocr.o(.text);
+        *libc.a:freer.o(.text);
+        *libc.a:impure.o(.text);
         src/libisagbprn.o(.text);
     } =0
 
@@ -479,6 +490,7 @@ SECTIONS {
         src/pokemon_size_record.o(.rodata)
         src/fldeff_misc.o(.rodata);
         src/field_special_scene.o(.rodata);
+        src/test_ui.o(.rodata);
         src/rotating_gate.o(.rodata);
         src/item_use.o(.rodata);
         src/battle_anim_effects_1.o(.rodata);
@@ -1156,6 +1168,26 @@ SECTIONS {
         *libc.a(.rodata);
         *libc.a(.data);
         *libc.a:syscalls.o(.rodata);
+        *libc.a:vfprintf.o(.data);
+        *libc.a:locale.o(.data);
+        *libc.a:findfp.o(.data);
+        *libc.a:fflush.o(.data);
+        *libc.a:wsetup.o(.data);
+        *libc.a:dtoa.o(.data);
+        *libc.a:mprec.o(.data);
+        *libc.a:mallocr.o(.data);
+        *libc.a:freer.o(.data);
+        *libc.a:impure.o(.data);
+        *libc.a:vfprintf.o(.rodata);
+        *libc.a:locale.o(.rodata);
+        *libc.a:findfp.o(.rodata);
+        *libc.a:fflush.o(.rodata);
+        *libc.a:wsetup.o(.rodata);
+        *libc.a:dtoa.o(.rodata);
+        *libc.a:mprec.o(.rodata);
+        *libc.a:mallocr.o(.rodata);
+        *libc.a:freer.o(.rodata);
+        *libc.a:impure.o(.rodata);
         src/libisagbprn.o(.rodata);
     } =0
 

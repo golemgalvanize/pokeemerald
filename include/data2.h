@@ -18,5 +18,6 @@ extern struct CompressedSpriteSheet gUnknown_0831C620;
 extern struct CompressedSpritePalette gUnknown_0831C628;
 extern const struct SpriteTemplate gUnknown_0831C688;
 extern const struct CompressedSpriteSheet gMonBackPicTable[];
+extern const union AnimCmd* const * const gMonAnimationsSpriteAnimsPtrTable[];
 
 #endif // GUARD_DATA2_H
